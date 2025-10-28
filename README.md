@@ -30,8 +30,6 @@ to your CMake configuration. This provides the imgui_cmake_wrapper target that c
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}.cc)
 target_link_libraries(${PROJECT_NAME} imgui_cmake_wrapper)
 ```
-### Choosing Backends
-
 
 ## Contributions
 
