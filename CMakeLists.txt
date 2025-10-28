@@ -33,8 +33,6 @@ cpmaddpackage(
   1.92.4
   DOWNLOAD_ONLY)
 
-message(STATUS ${imgui_SOURCE_DIR})
-
 add_library(imgui_cmake_wrapper STATIC)
 
 target_sources(
@@ -104,11 +102,6 @@ elseif(${IMGUI_PLATFORM_BACKEND} STREQUAL "sdl3")
                  PRIVATE ${imgui_SOURCE_DIR}/backends/imgui_impl_sdl3.cpp)
   target_link_libraries(imgui_cmake_wrapper PUBLIC SDL3)
 endif()
-
 target_include_directories(
   imgui_cmake_wrapper PUBLIC ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends
                              ${imgui_SOURCE_DIR}/misc/cpp)
-
-# add_executable(imgui_cmake_wrapper_example
-#                ${imgui_SOURCE_DIR}/examples/example_glfw_opengl3/main.cpp)
-# target_link_libraries(imgui_cmake_wrapper_example PUBLIC imgui_cmake_wrapper)

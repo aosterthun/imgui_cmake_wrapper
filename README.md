@@ -10,21 +10,28 @@ While trying to setup a new C++ project with imgui using CMake I was confronted 
 
 In order to use this wrapper in your project using CPM add:
 ```cmake
-include(cmake/CPM.cmake)
-CPMAddPackage("gh:aosterthun/imgui_cmake_wrapper#0.0.1")
+file(
+  DOWNLOAD
+  https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.40.8/CPM.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake
+  EXPECTED_HASH SHA256=78ba32abdf798bc616bab7c73aac32a17bbd7b06ad9e26a6add69de8f3ae4791
+)
+include(${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake)
+CPMAddPackage(
+  NAME imgui_cmake_wrapper
+  GITHUB_REPOSITORY "aosterthun/imgui_cmake_wrapper"
+  GIT_TAG v0.0.1
+  OPTIONS 
+    "IMGUI_RENDERER_BACKEND vulkan"
+    "IMGUI_PLATFORM_BACKEND glfw")
 ```
 to your CMake configuration. This provides the imgui_cmake_wrapper target that can be linked to any target you want.
 ```cmake
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}.cc)
 target_link_libraries(${PROJECT_NAME} imgui_cmake_wrapper)
 ```
+### Choosing Backends
 
-## Roadmap
-
-- [ ] Switch from git submodules to CMake FetchContent or ExternalProject where possible for adding internal dependencies to make this more CMake native
-- [ ] Add a system for choosing which backend to build. Would be nice if this could be realized using CMakes components feature.
-- [ ] Add SDL support
-- [ ] Add Vulkan support
 
 ## Contributions
 
